@@ -1,5 +1,5 @@
 console.log("set");
-let answer=0,DisplayScreen='',symbol = 'd',ini=0,firstval=0;
+let answer=0,DisplayScreen='',symbol = 'd',ini=0,firstval='';
 
 function helper(num1,num2,operator){
   let output = 0;
@@ -20,7 +20,7 @@ function helper(num1,num2,operator){
         break;
 
      case '/': 
-        if (b === 0) {
+        if (num2 === 0) {
           throw "Can't divide by 0!"
         } else {
           output = num1 / num2
@@ -63,10 +63,16 @@ function cal(num){
 }
 
 function storeVal(EnteredValue){
+  
+  if(EnteredValue=='*' || EnteredValue=='-' || EnteredValue=='+' || EnteredValue=='/'){
+    firstval=' ';
+    DisplayScreen = ''+ DisplayScreen + EnteredValue;
+  }else
   if(EnteredValue=='C'){
     DisplayScreen=0;
     document.getElementById("output").innerHTML = DisplayScreen;
     answer=0;
+    firstval=0;
   }else
   if(EnteredValue=='='){
     answer=cal(DisplayScreen);
@@ -76,10 +82,13 @@ function storeVal(EnteredValue){
   }else{
     if(DisplayScreen=='0'){
       DisplayScreen='' + EnteredValue;
+      firstval = '' + EnteredValue; 
     }else{
     DisplayScreen = ''+ DisplayScreen + EnteredValue;
+    firstval = '' + firstval + EnteredValue;
   }
-  document.getElementById("output").innerHTML = DisplayScreen;
+
+  document.getElementById("output").innerHTML = firstval;
   console.log(DisplayScreen);
   }
 
